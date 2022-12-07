@@ -6,6 +6,9 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Sauna;
+use App\Models\Timer;
+
 
 class ProfileController extends Controller
 {
@@ -63,5 +66,16 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function log()
+    {
+        $saunas = Sauna::all();
+        $timers = Timer::all();
+
+        return view(
+            'logs',
+            ['saunas' => $saunas, 'timers' => $timers ]
+        );
     }
 }

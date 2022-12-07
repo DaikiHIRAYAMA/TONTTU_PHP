@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Timer;
+use App\Models\Sauna;
 
 
 class TimerController extends Controller
@@ -15,11 +16,8 @@ class TimerController extends Controller
      */
     public function index()
     {
-        $timers = Timer::all();
-
         return view(
-            'timer.index',
-            ['timers' => $timers]
+            'timer.index'
         );
     }
 
@@ -30,7 +28,7 @@ class TimerController extends Controller
      */
     public function create()
     {
-        //
+  //
     }
 
     /**
@@ -41,7 +39,12 @@ class TimerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $timer = new Timer;
+
+        // $timer->fill($request->all())->save();
+//sauna_startのviewに飛ばす？
+        return view('timer.sauna_start'
+        );
     }
 
     /**
@@ -52,8 +55,13 @@ class TimerController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('timer.show',[
+            'timer' => Timer::findOrFail($id),
+            'sauna' => Sauna::findOrFail(Timer::findOrFail($id)->sauna_id),
+        ]);
+
     }
+       
 
     /**
      * Show the form for editing the specified resource.
@@ -88,4 +96,67 @@ class TimerController extends Controller
     {
         //
     }
+
+    public function sauna_start(Request $request)
+    {
+        return view('timer.sauna_start');
+     //   $timer = new Timer;
+     //   $timer->fill($request->all())->save();
+
+     /*   return view(
+            'timer.sauna_start',
+            ['timer' => $timer]
+            );
+            */
+    }
+
+    public function sauna_end()
+    {
+        $timer = Timer::where('$id' , '=', '$request->id')->update([
+            'sauna_end' => Datetime('now'),
+        ]);
+        $timer->sauna_end->save();
+        return view(
+            'timer.sauna_end',
+            ['timer' => $timer]
+            );
+    }
+
+    public function update1()
+    {
+
+    }
+    public function water_start()
+    {
+
+    }
+    public function update2()
+    {
+
+    }
+    public function water_end()
+    {
+
+    }
+    public function update3()
+    {
+
+    }
+    public function outside_start()
+    {
+
+    }
+    public function update4()
+    {
+
+    }
+    public function outside_end()
+    {
+
+    }
+    public function update5()
+    {
+
+    }
+
 }

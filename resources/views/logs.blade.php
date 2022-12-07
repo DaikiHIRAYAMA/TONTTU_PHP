@@ -3,12 +3,10 @@
 @section('title','Dashboard')
 
 @section('content_header')
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<script src="{{ asset('js/app.js') }}"></script>
+<h1 class="text-center">ととのいログ</h1>
 @stop
 
 @section('content')
-<h1 class="text-center">ととのいログ</h1>
 <table class="table table-hover ">
   <thead>
     <tr>
@@ -22,16 +20,30 @@
     </tr>
   </thead>
   <tbody>
-        <% @timers.each do |timer| %>
+    @foreach($timers as $timer)
+
+    @php
+    $SE = $timer->sauna_end_time;
+    $SS = $timer->sauna_start_time;
+    $ST = strtotime($SS)-strtotime($SE);
+    $WE = $timer->water_end_time;
+    $WS = $timer->water_start_time;
+    $WT = strtotime($WS)-strtotime($WE);
+    $OE = $timer->outside_end_time;
+    $OS = $timer->outside_start_time ;
+    $OT = strtotime($OS)-strtotime($OE) ;
+    @endphp
+
       <tr>
-        <td><%= timer.created_at.strftime("%Y年%m月%d日") %></td>
-        <td><%= (timer.water_start_time - timer.sauna_finish_time).ceil %>秒</td>
-        <td><%= (timer.outside_start_time - timer.water_finish_time).ceil %>秒</td>
-        <td><%= (timer.updated_at - timer.outside_finish_time).ceil %>秒</td>
-        <td><%= link_to '詳細', timer %></td>
-        <td><%= link_to '削除', timer, method: :delete, data: { confirm: '本当に削除してもよろしいですか?' } %></td>
+        <td>{{ $timer->created_at->format('Y年m月d日') }}</td>
+        <td>{{ $ST }}秒</td>
+        <td>{{ $WT }}秒</td>
+        <td>{{ $OT }}秒</td>
+
+        <td><a href="{{ route('timer.show', $timer->id) }}" role="button">詳細</a></td>
+        <td>削除</td>
       </tr>
-    <% end %>
+    @endforeach
   </tbody>
 </table>
 <br>
@@ -39,9 +51,6 @@
 @stop
 
 @section('css')
-    {{-- ページごとCSSの指定
-    <link rel="stylesheet" href="/css/xxx.css">
-    --}}
 @stop
 
 @section('js')
