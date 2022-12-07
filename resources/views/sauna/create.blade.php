@@ -53,14 +53,11 @@
 
 
   <div class="actions text-center">
-    <%= form.hidden_field :user_id, value: current_user.id %>
     <br>
      <p class="text-center ">
         <button type="submit" class="btn btn-primary">登録</button>
-        <%= form.submit "登録する" , class: " btn btn-malformation btn-outline-danger" %>
     </p>
   </div>
-<% end %>
 <style>
 *,
 *:before,

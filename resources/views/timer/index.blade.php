@@ -8,7 +8,7 @@
 
 @section('content')
  <p class="text-center"  >
- <button class="btn btn-malformation btn-outline-danger"  onclick="location.href='./timer/sauna_start'">
+ <button class="btn btn-malformation btn-outline-danger"  onclick="location.href='./sauna_start'">
     TOTONOU
 </button>
  </p>

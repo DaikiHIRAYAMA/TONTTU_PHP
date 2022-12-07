@@ -38,6 +38,9 @@ Route::get('adminlte', function(){
 });
 Route::get('logs',[ProfileController::class, 'log'
 ]);
+Route::get('timer/sauna_start',[TimerController::class,'create'
+]);
+Route::post('timer/sauna_start',[TimerController::class,'sauna_start'])->name('sauna_start');
 /*
 Route::get('logs', function(){
     return view('logs');
@@ -53,14 +56,9 @@ Route::resource('timer',TimerController::class);
 
 Route::group(['prefix' => 'timer', 'as' => 'timer.'], function(){
     
-    Route::get('/sauna_start',function(){
-    return view('timer.sauna_start');
-    })
-    ->name('sauna_start');
-
     Route::get('/{id}/sauna_end',function($id){
         return view('timer/sauna_end');
-    })->name('.sauna_end');
+    })->where('id','[0-9]+')->name('sauna_end');
 
     Route::get('/{id}/water_start',function($id){
         return view('timer/water_start');

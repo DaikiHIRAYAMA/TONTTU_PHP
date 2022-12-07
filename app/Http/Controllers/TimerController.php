@@ -28,7 +28,7 @@ class TimerController extends Controller
      */
     public function create()
     {
-  //
+        return view('timer.sauna_start');
     }
 
     /**
@@ -99,15 +99,11 @@ class TimerController extends Controller
 
     public function sauna_start(Request $request)
     {
-        return view('timer.sauna_start');
-     //   $timer = new Timer;
-     //   $timer->fill($request->all())->save();
-
-     /*   return view(
-            'timer.sauna_start',
-            ['timer' => $timer]
-            );
-            */
+        $timer = new Timer();
+        $timer->fill($request->all())->save;
+        
+     //   return view('timer.sauna_end',['timer' => $timer]);
+        return redirect('timer.sauna_end');
     }
 
     public function sauna_end()
