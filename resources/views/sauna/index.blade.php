@@ -17,7 +17,7 @@
 <hr style="border:none;border-top:dashed 2px black;height:1px;width:100%;">
 
 
-<p class="text-center"><a class="btn" href="{{ route('sauna.create') }}" role="button">NEXTサウナを登録する</a></p>
+<p class="text-center"><a class="btn btn-malformation btn-outline-danger" href="{{ route('sauna.create') }}" role="button">NEXTサウナを登録する</a></p>
 
 <hr style="border:none;border-top:dashed 2px black;height:1px;width:100%;">
 
@@ -33,7 +33,6 @@
       <th>サウナ温度</th>
       <th>サウナ湿度</th>
       <th>水風呂温度</th>
-      <th>NEXTサウナ</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -41,11 +40,10 @@
   <tbody>
     @foreach($saunas as $sauna)
       <tr>
-        <td><a href="{{ route('sauna.show', $sauna->id) }}" role="button">{{ $sauna->name }}</a></td>
+        <td>{{ $sauna->name }}</td>
         <td>{{ $sauna->sauna_temperature }}℃</td>
         <td>{{ $sauna->sauna_humidity }}%</td>
         <td>{{ $sauna->water_temperature }}℃</td>
-        <td>登録</td>
       </tr>
     @endforeach
 

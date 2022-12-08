@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Sauna;
 
 class SaunaController extends Controller
@@ -15,8 +16,9 @@ class SaunaController extends Controller
     public function index()
     {
         $saunas = Sauna::all();
-        $last_sauna = Sauna::all()->last();
+        $last_sauna = Sauna::latest()->first();
 
+Log::debug($saunas);
         return view(
             'sauna.index',
             ['saunas' => $saunas, 'last_sauna' => $last_sauna ]
@@ -85,7 +87,7 @@ class SaunaController extends Controller
         $sauna = Sauna::find($id);
         $sauna->fill($request->all())->save();
 
-        return redirect()->route('sauna.index')->with('message','編集しました');
+        return redirect()->route('sauna.index')->with('message','登録しました');
     }
 
     /**

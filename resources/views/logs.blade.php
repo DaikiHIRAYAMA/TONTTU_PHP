@@ -15,7 +15,6 @@
       <th scope="col">水風呂時間</th>
       <th scope="col">外気浴時間</th>
       <th scope="col">詳細</th>
-      <th scope="col">削除</th>
 
     </tr>
   </thead>
@@ -25,13 +24,13 @@
     @php
     $SE = $timer->sauna_end_time;
     $SS = $timer->sauna_start_time;
-    $ST = strtotime($SS)-strtotime($SE);
+    $ST = strtotime($SE)-strtotime($SS);
     $WE = $timer->water_end_time;
     $WS = $timer->water_start_time;
-    $WT = strtotime($WS)-strtotime($WE);
+    $WT = strtotime($WE)-strtotime($WS);
     $OE = $timer->outside_end_time;
     $OS = $timer->outside_start_time ;
-    $OT = strtotime($OS)-strtotime($OE) ;
+    $OT = strtotime($OE)-strtotime($OS) ;
     @endphp
 
       <tr>
@@ -41,12 +40,14 @@
         <td>{{ $OT }}秒</td>
 
         <td><a href="{{ route('timer.show', $timer->id) }}" role="button">詳細</a></td>
-        <td>削除</td>
+
+
       </tr>
     @endforeach
   </tbody>
 </table>
 <br>
+
 
 @stop
 

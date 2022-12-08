@@ -3,8 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use DateTime;
+
 use App\Models\Timer;
 use App\Models\Sauna;
+
+
+
+
 
 
 class TimerController extends Controller
@@ -16,8 +23,10 @@ class TimerController extends Controller
      */
     public function index()
     {
+        $sauna = Sauna::latest()->first();
         return view(
-            'timer.index'
+            'timer.index',
+            ['sauna' => $sauna]
         );
     }
 
@@ -26,9 +35,21 @@ class TimerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('timer.sauna_start');
+        $timer = new Timer;
+        $timer->sauna_id  = $request->sauna_id;
+        $timer->sauna_end_time  = $request->sauna_end_time;
+        $timer->water_start_time  = $request->water_start_time;
+        $timer->water_end_time  = $request->water_end_time;
+        $timer->outside_start_time  = $request->outside_start_time;
+        $timer->outside_end_time  = $request->outside_end_time;
+        $timer->user_id  = $request->user_id;
+        $timer->sauna_start_time  = $request->sauna_start_time;
+  
+        $timer->save();
+       // return view('timer.sauna_end',['id'=>$timer->id]);
+        return redirect()->route('sauna_end',$timer->id);
     }
 
     /**
@@ -43,7 +64,7 @@ class TimerController extends Controller
 
         // $timer->fill($request->all())->save();
 //sauna_startのviewに飛ばす？
-        return view('timer.sauna_start'
+        return view('timer.sauna_end'
         );
     }
 
@@ -94,65 +115,94 @@ class TimerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $timer = Timer::find($id);
+        $timer->delete();
+        return redirect()->route('logs')->with('message','削除しました');
     }
 
-    public function sauna_start(Request $request)
+    public function sauna_end($id)
     {
-        $timer = new Timer();
-        $timer->fill($request->all())->save;
-        
-     //   return view('timer.sauna_end',['timer' => $timer]);
-        return redirect('timer.sauna_end');
-    }
+        $timer = Timer::find($id);
+        $sauna = Sauna::latest()->first();
 
-    public function sauna_end()
-    {
-        $timer = Timer::where('$id' , '=', '$request->id')->update([
-            'sauna_end' => Datetime('now'),
-        ]);
-        $timer->sauna_end->save();
         return view(
             'timer.sauna_end',
+            ['timer' => $timer, 'sauna' => $sauna]
+
+        );
+ 
+    }
+
+    public function update1(Request $request)
+    {
+        $timer = Timer::find($request->id);
+        $timer->sauna_end_time = $request->sauna_end_time;
+        $timer->save();
+        return view(
+            'timer.water_start',
             ['timer' => $timer]
-            );
-    }
+        );
+        //return redirect()->route('water_start',$timer->id);
 
-    public function update1()
+    }
+    public function water_start(Request $request)
     {
-
+        $timer = Timer::find($request->id);
+        $timer->water_start_time  = $request->water_start_time;
+        $timer->save();
+        return redirect()->route('water_end',$timer->id);
     }
-    public function water_start()
+
+    public function water_end($id)
     {
+        $timer = Timer::find($id);
+        $sauna = Sauna::latest()->first();
 
+        return view(
+            'timer.water_end',
+            ['timer' => $timer, 'sauna' => $sauna]
+
+        );
     }
-    public function update2()
+    public function update2(Request $request)
     {
-
+        $timer = Timer::find($request->id);
+        $timer->water_end_time = $request->water_end_time;
+        $timer->save();
+        return view(
+            'timer.outside_start',
+            ['timer' => $timer]
+        );
     }
-    public function water_end()
+
+    public function outside_start(Request $request)
     {
+        $timer = Timer::find($request->id);
+        $timer->outside_start_time  = $request->outside_start_time;
+        $timer->save();
+        return redirect()->route('outside_end',$timer->id);
 
     }
-    public function update3()
+
+    public function outside_end($id)
     {
+        $timer = Timer::find($id);
+        $sauna = Sauna::latest()->first();
 
+        return view(
+            'timer.outside_end',
+            ['timer' => $timer, 'sauna' => $sauna]
+
+        );
     }
-    public function outside_start()
+    public function update3(Request $request)
     {
+        $timer = Timer::find($request->id);
+        $timer->outside_end_time = $request->outside_end_time;
+        $timer->save();
+        return redirect()->route('logs');
 
     }
-    public function update4()
-    {
 
-    }
-    public function outside_end()
-    {
-
-    }
-    public function update5()
-    {
-
-    }
 
 }

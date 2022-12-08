@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'timer',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -307,14 +307,12 @@ return [
             'text'        => 'totonou',
             'url'         => 'timer/',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
             'label_color' => 'success',
         ],
         [
             'text'        => 'logs',
             'url'         => 'logs',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
             'label_color' => 'success',
         ],
         [
@@ -325,19 +323,12 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => '#',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text'        => 'condition',
-            'url'         => 'condition',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => '#',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [

@@ -58,6 +58,20 @@
         <button type="submit" class="btn btn-primary">登録</button>
     </p>
   </div>
+
+
+
+<body>
+
+<div class="text-center">
+  <button class="back btn-secondary btn-lg" type="button" onClick="history.back()">戻る</button>
+</div>
+
+</body>
+</html>
+@stop
+
+@section('css')
 <style>
 *,
 *:before,
@@ -93,20 +107,6 @@ button.btn {
 }
 
 </style>
-
-</html>
-<body>
-
-
-<button class="back" type="button" onClick="history.back()">戻る</button>
-
-</body>
-@stop
-
-@section('css')
-    {{-- ページごとCSSの指定
-    <link rel="stylesheet" href="/css/xxx.css">
-    --}}
 @stop
 
 @section('js')

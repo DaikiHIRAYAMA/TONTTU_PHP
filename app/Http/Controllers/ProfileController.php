@@ -75,7 +75,7 @@ class ProfileController extends Controller
 
         return view(
             'logs',
-            ['saunas' => $saunas, 'timers' => $timers ]
+            ['saunas' => $saunas, 'timers' => $timers]
         );
     }
 }
