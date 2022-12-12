@@ -5,13 +5,12 @@
 @section('content_header')
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="{{ asset('js/app.js') }}"></script>
-<h1>ダッシュボード<h1>
+<h1>ダッシュボード</h1>
 @stop
 
 @section('content')
 <p>ここがコンテンツ部分</p>
 @stop
-
 @section('css')
     {{-- ページごとCSSの指定
     <link rel="stylesheet" href="/css/xxx.css">
