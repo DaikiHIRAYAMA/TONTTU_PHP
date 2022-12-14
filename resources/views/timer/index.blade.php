@@ -3,9 +3,14 @@
 @section('title','Dashboard')
 
 @section('content_header')
+
+@if(isset($sauna))
 <h3 class="text-center">NEXT SAUNA </h3>
 <h1 class="text-center">{{ $sauna->name }}</h1>
 <h3 class="text-center">温度:{{ $sauna->sauna_temperature }}℃  湿度:{{ $sauna->sauna_humidity }}℃  水温:{{ $sauna->water_temperature }}℃</h3>
+@else
+<p>HELLO</p>
+@endif
 
 @stop
 

@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'timer',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -291,11 +291,7 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
+
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -319,22 +315,6 @@ return [
             'text'        => 'sauna',
             'url'         => 'sauna',
             'icon'        => 'far fa-fw fa-file',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => '#',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => '#',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'logout',
-            'url'  => '#',
-            'icon' => 'fas fa-fw fa-lock',
         ],
 
 

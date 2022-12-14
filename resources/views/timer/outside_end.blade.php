@@ -2,6 +2,7 @@
 
 @section('title','Dashboard')
 
+
 @section('content')
 <h3 class="text-center ">心ゆくまでお楽しみください</h3>
 <h5 class="text-center ">水分補給をお忘れなく</h5>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Sauna;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -43,6 +44,14 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        $sauna = Sauna::create([
+            'name' => '平均サウナ',
+            'sauna_temperature' => 80,
+            'sauna_humidity' => 60,
+            'water_temperature' => 15,
+            'user_id' => $this->user->id
         ]);
 
         event(new Registered($user));

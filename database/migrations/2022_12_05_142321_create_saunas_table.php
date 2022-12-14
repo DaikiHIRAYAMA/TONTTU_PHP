@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('sauna_temperature');
             $table->integer('sauna_humidity');
             $table->integer('water_temperature');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps($precision = 0);
         });
     }

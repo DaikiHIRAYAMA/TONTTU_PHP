@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use DateTime;
+use Auth;
 
 use App\Models\Timer;
 use App\Models\Sauna;
@@ -16,6 +17,10 @@ use App\Models\Sauna;
 
 class TimerController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +28,7 @@ class TimerController extends Controller
      */
     public function index()
     {
-        $sauna = Sauna::latest()->first();
+        $sauna = Sauna::where('user_id', Auth::user()->id)->latest();
         return view(
             'timer.index',
             ['sauna' => $sauna]
