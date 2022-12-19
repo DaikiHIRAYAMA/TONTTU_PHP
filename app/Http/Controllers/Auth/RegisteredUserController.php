@@ -46,13 +46,6 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $sauna = Sauna::create([
-            'name' => '平均サウナ',
-            'sauna_temperature' => 80,
-            'sauna_humidity' => 60,
-            'water_temperature' => 15,
-            'user_id' => $this->user->id
-        ]);
 
         event(new Registered($user));
 

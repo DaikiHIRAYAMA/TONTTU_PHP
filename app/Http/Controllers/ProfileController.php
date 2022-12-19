@@ -70,8 +70,8 @@ class ProfileController extends Controller
 
     public function log()
     {
-        $saunas = Sauna::where('user_id', Auth::user()->id);
-        $timers = Timer::where('user_id',Auth::user()->id);
+        $saunas = Sauna::where('user_id', Auth::id())->get();
+        $timers = Timer::where('user_id', Auth::id())->get();
 
         return view(
             'logs',

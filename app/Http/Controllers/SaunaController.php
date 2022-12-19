@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Sauna;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 
 class SaunaController extends Controller
@@ -23,7 +23,6 @@ class SaunaController extends Controller
         $saunas = Sauna::all();
         $last_sauna = Sauna::latest()->first();
 
-Log::debug($saunas);
         return view(
             'sauna.index',
             ['saunas' => $saunas, 'last_sauna' => $last_sauna ]

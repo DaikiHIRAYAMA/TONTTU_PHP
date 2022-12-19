@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use DateTime;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Timer;
 use App\Models\Sauna;
@@ -28,7 +28,19 @@ class TimerController extends Controller
      */
     public function index()
     {
-        $sauna = Sauna::where('user_id', Auth::user()->id)->latest();
+        $sauna = Sauna::where('user_id', Auth::id())->latest()->first();
+
+        if ($sauna == NULL){
+          $sauna = new Sauna;
+          $sauna->name = "平均サウナ";
+          $sauna->sauna_temperature = 80;
+          $sauna->sauna_humidity = 50;
+          $sauna->water_temperature = 20;
+          $sauna->user_id = Auth::id();
+          $sauna->save();
+        }
+          
+        //where('user_id', Auth::user()->id)->latest();
         return view(
             'timer.index',
             ['sauna' => $sauna]
@@ -51,7 +63,6 @@ class TimerController extends Controller
         $timer->outside_end_time  = $request->outside_end_time;
         $timer->user_id  = $request->user_id;
         $timer->sauna_start_time  = $request->sauna_start_time;
-  
         $timer->save();
        // return view('timer.sauna_end',['id'=>$timer->id]);
         return redirect()->route('sauna_end',$timer->id);
@@ -81,10 +92,19 @@ class TimerController extends Controller
      */
     public function show($id)
     {
+      $auth_id = Auth::id();
+      $usertimer = Timer::find($id);
+
+      if ($auth_id == $usertimer->user_id){
         return view('timer.show',[
             'timer' => Timer::findOrFail($id),
             'sauna' => Sauna::findOrFail(Timer::findOrFail($id)->sauna_id),
         ]);
+      }
+      else{
+        return view('dashboard');
+      };
+
 
     }
        

@@ -4,13 +4,10 @@
 
 @section('content_header')
 
-@if(isset($sauna))
+
 <h3 class="text-center">NEXT SAUNA </h3>
 <h1 class="text-center">{{ $sauna->name }}</h1>
 <h3 class="text-center">温度:{{ $sauna->sauna_temperature }}℃  湿度:{{ $sauna->sauna_humidity }}℃  水温:{{ $sauna->water_temperature }}℃</h3>
-@else
-<p>HELLO</p>
-@endif
 
 @stop
 
@@ -23,7 +20,7 @@
         <input type="hidden" id="water_end_time" name="water_end_time" value="20221023000000"/>
         <input type="hidden" id="outside_start_time" name="outside_start_time" value="20221023000000"/>
         <input type="hidden" id="outside_end_time" name="outside_end_time" value="20221023000000"/>
-        <input type="hidden" id="user_id" name="user_id" value="1"/>
+        <input type="hidden" id="user_id" name="user_id" value="{{ $sauna->user_id }}"/>
         <input type="hidden" id="sauna_start_time" name="sauna_start_time" value="<?php
             $now = new Datetime("now");
             $date = $now->format("YmdHis");

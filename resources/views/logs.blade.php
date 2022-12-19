@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     @foreach($timers as $timer)
-
+  
     @php
     $SE = $timer->sauna_end_time;
     $SS = $timer->sauna_start_time;
