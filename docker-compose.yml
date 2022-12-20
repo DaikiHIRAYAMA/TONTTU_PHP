@@ -107,6 +107,11 @@ services:
             PMA_HOST: mysql
         networks:
             - sail
+    composer:
+        image: composer
+        command: "composer install"
+        volumes:
+            - ./:/app
 networks:
     sail:
         driver: bridge
