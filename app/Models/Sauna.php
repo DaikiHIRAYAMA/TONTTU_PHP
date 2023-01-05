@@ -13,5 +13,6 @@ class Sauna extends Model
         'sauna_temperature',
         'sauna_humidity',
         'water_temperature',
+        'user_id'
     ];
 };

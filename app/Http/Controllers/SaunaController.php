@@ -20,8 +20,8 @@ class SaunaController extends Controller
      */
     public function index()
     {
-        $saunas = Sauna::all();
-        $last_sauna = Sauna::latest()->first();
+        $last_sauna = Sauna::where('user_id', Auth::id())->latest()->first();
+        $saunas = Sauna::where('user_id', Auth::id())->get();
 
         return view(
             'sauna.index',

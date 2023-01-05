@@ -50,6 +50,7 @@
             水風呂温度：<span>20</span>度
         </p>
     <div>
+    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}"/>
 
 
   <div class="actions text-center">
